@@ -57,6 +57,18 @@
         .form-group button:hover {
             background: #218838;
         }
+
+        @media (max-width: 768px) {
+            .container {
+            display: flex;
+            flex-direction: column-reverse;
+            width: 100%;
+           }
+           .image-container img {
+            width: 100%;
+            height: 200px;
+        }    
+        }
     </style>
 </head>
 <body>
@@ -115,9 +127,10 @@
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
     .then(data => {
         alert('Nje email konfirmimi u dergua ne email tuaj');
+        name.value="";
+        email.value="";
     })
     .catch((error) => {
         console.error('Error:', error);

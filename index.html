@@ -11,7 +11,7 @@
         .container {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            width: 100%;
+            width: 95%;
             background-color: #f4f4f4;
         }
         .image-container {
@@ -83,15 +83,29 @@
     </div>
     <div class="form-container">
         <h1>KINEMAJA VERORE</h1>
-        <h3>Kinemaja verore e DPA-së çeli siparin e një sezoni të ngjeshur artistik me shfaqjen e disa filmave më ikonikë të kinematografisë shqiptare. Me rastin e Vitit Mbarëkombëtar të 80-vjetorit të Çlirimit, kjo hapësirë e re kulturore pranë DPA-së do t'i kushtojë një rëndësi të posaçme realizimeve filmike që i referohen Luftës Nacionalçlirimtare.</h3>
+        <h3>Viti 2024 shënon një pikë kthesë në veprimtarinë e Drejtorisë së Përgjithshme të Arkivave (DPA). Përmes jetësimit të një projekti novator, DPA-ja ndryshon krejtësisht faqe, duke u shndërruar nga një institucion arkivor në një kompleks të mirëfilltë kulturor. 
+        </h3>
+        <h3>
+            Me çeljen e Kinemasë Verore, e cila zotëron një kapacitet prej 140 ulësesh, DPA-ja ofron një alternativë kulturore bashkëkohore. Në sajë të një shërbimi që ndërthur edukimin me zbavitjen, kjo hapësirë i adresohet veçanërisht të rinjve, duke i inkurajuar të njohin faqet e lavdishme të historisë sonë kombëtare.
+        </h3>
+        <h3>
+            Kinemaja Verore e DPA-së e ngriti siparin me shfaqjen e një prej filmave më ikonikë të kinematografisë shqiptare, “Tomka dhe shokët e tij”. Me rastin e Vitit Mbarëkombëtar të 80-vjetorit të Çlirimit, DPA-ja i kushtoi një rëndësi të posaçme betejës së shqiptarëve për liri, duke shfaqur 10 realizime filmike që i referohen Luftës Nacionalçlirimtare.
+        </h3>
         <form id="filmForm">
             <h2>Rezervoni vendin tuaj</h2>
             <div class="form-group">
                 <label for="film">Zgjidhni eventin qe doni te ndiqni:</label>
                 <select id="film" name="film">
-                    <option value="film1">Film - Lulekuqet mbi mure</option>
-                    <option value="film2">Film - Njeriu me top</option>
-                    <option value="film3">Film - Shoqja nga qyteti</option>
+                    <option value="Gjeneral gramafoni - 24 Qershor - 20:00">Gjeneral gramafoni - 24 Qershor - 20:00</option>
+                    <option value="Lulekuqet mbi mure - 16 Korrik - 20:00">Lulëkuqet mbi mure - 16 Korrik - 20:00</option>
+                    <option value="Partizani i vogel Velo - 25 Korrik - 20:00">Partizani i vogël Velo - 25 Korrik - 20:00</option>
+                    <option value="Mengjese Lufte - 14 Gusht - 20:00">Mëngjese Lufte - 14 Gusht - 20:00</option>
+                    <option value="Yjet e neteve te gjata - 29 Gusht - 20:00">Yjet e netëve të gjata - 29 Gusht - 20:00</option>
+                    <option value="Njeriu me top - 11 Shtator - 20:00">Njeriu me top - 11 Shtator - 20:00</option>
+                    <option value="Nusja dhe shteterrethimi - 24 Shtator - 18:00">Nusja dhe shtetërrethimi - 24 Shtator - 18:00</option>
+                    <option value="Malet me blerim mbuluar - 8 Tetor - 18:00">Malet me blerim mbuluar - 8 Tetor - 18:00</option>
+                    <option value="I teti ne bronz - 28 Tetor - 18:00">I teti në bronz - 28 Tetor - 18:00</option>
+                    <option value="Kthimi i ushtrise se vdekur - 11 Nentor - 18:00">Kthimi i ushtrisë së vdekur - 11 Nentor - 18:00</option>
                 </select>
             </div>
             <div class="form-group">
@@ -101,6 +115,16 @@
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="persona">Numri i biletave:</label>
+                <select id="persona" name="persona" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
             <div class="form-group">
                 <button type="submit">Dergo</button>
@@ -116,11 +140,13 @@
     const film = document.getElementById('film').value;
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
+    const persona = document.getElementById('persona').value;
 
     const data = {
         film,
         name,
-        email
+        email,
+        persona
     };
 
     fetch('https://teaterbackend.netlify.app/submit', {
@@ -132,11 +158,14 @@
     })
     .then(data => {
         alert('Nje email konfirmimi u dergua ne email tuaj');
-        name.value="";
-        email.value="";
+        document.getElementById('name').value="";
+        document.getElementById('email').value="";
+        document.getElementById('film').value="";
+        document.getElementById('persona').value="";
     })
     .catch((error) => {
         console.error('Error:', error);
+        alert('Gabim. Provoni perseri me vone');
     });
 });
 
